@@ -4,4 +4,6 @@
 
 //(par8:Party {Name: "Social Democrats", Leader: "Stephen Donnelly", Leader: "Catherine Murphy", Leader: "Roisin Shortall", Founded: 2015}),
 
+match (n:Party {Name: "Social Democrats"}) return n;
+
 match (n:Party {Name: "Social Democrats"}) delete n;
