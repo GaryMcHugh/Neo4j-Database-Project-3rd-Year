@@ -39,4 +39,4 @@ RETURN
 ```
 
 ## References
-1. [Neo4J website](http://neo4j.com/), the website of the Neo4j database.
+1. [Irish Constituencies](https://en.wikipedia.org/wiki/Parliamentary_constituencies_in_the_Republic_of_Ireland), this is the website I used to find the names of the constituencies and the number of seats in each.

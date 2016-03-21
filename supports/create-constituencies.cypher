@@ -1,9 +1,43 @@
-// This query creates nodes representing all constituencies in Ireland.
+// This is the query I created to make nodes for all Constituencies in Ireland.
 
 
-CREATE
-	(gw:Constituency {name: "Galway West"})
-	, (gw:Constituency {name: "Galway East"})
-	, ...
-	
-;
+ CREATE (con:Constituency {Name: "Carlow–Kilkenny", Seats: 5}),
+		(con1:Constituency {Name: "Cavan–Monaghan", Seats: 4}),
+		(con2:Constituency {Name: "Clare", Seats: 4}),
+		(con3:Constituency {Name: "Cork_East", Seats: 4}),
+		(con4:Constituency {Name: "Cork_North–Central", Seats: 4}),
+		(con5:Constituency {Name: "Cork_North–West", Seats: 3}),
+		(con6:Constituency {Name: "Cork_South–Central", Seats: 4}),
+		(con7:Constituency {Name: "Cork_South–West", Seats: 3}),
+		(con8:Constituency {Name: "Donegal", Seats: 5}),
+		(con9:Constituency {Name: "Dublin_Bay_North", Seats: 5}),
+		(con10:Constituency {Name: "Dublin_Bay_South", Seats: 4}),
+		(con11:Constituency {Name: "Dublin_Central", Seats: 3}),
+		(con12:Constituency {Name: "Dublin_Fingal", Seats: 5}),
+		(con13:Constituency {Name: "Dublin_Mid–West", Seats: 4}),
+		(con14:Constituency {Name: "Dublin_North–West", Seats: 3}),
+		(con15:Constituency {Name: "Dublin_Rathdown", Seats: 3}),
+		(con16:Constituency {Name: "Dublin_South–Central", Seats: 4}),
+		(con17:Constituency {Name: "Dublin_South–West", Seats: 5}),
+		(con18:Constituency {Name: "Dublin_West", Seats: 4}),
+		(con19:Constituency {Name: "Dun_Laoghaire", Seats: 4}),
+		(con20:Constituency {Name: "Galway_East", Seats: 3}),
+		(con21:Constituency {Name: "Galway_West", Seats: 5}),
+		(con22:Constituency {Name: "Kerry", Seats: 5}),
+		(con23:Constituency {Name: "Kildare_North", Seats: 4}),
+		(con24:Constituency {Name: "Kildare_South", Seats: 3}),
+		(con25:Constituency {Name: "Laois", Seats: 3}),
+		(con26:Constituency {Name: "Limerick_City", Seats: 4}),
+		(con27:Constituency {Name: "Limerick_County", Seats: 3}),
+		(con28:Constituency {Name: "Longford–Westmeath", Seats: 4}),
+		(con29:Constituency {Name: "Louth", Seats: 5}),
+		(con30:Constituency {Name: "Mayo", Seats: 4}),
+		(con31:Constituency {Name: "Meath_East", Seats: 3}),
+		(con32:Constituency {Name: "Meath_West", Seats: 3}),
+		(con33:Constituency {Name: "Offaly", Seats: 3}),
+		(con34:Constituency {Name: "Roscommon–Galway", Seats: 3}),
+		(con35:Constituency {Name: "Sligo–Leitrim", Seats: 4}),
+		(con36:Constituency {Name: "Tipperary", Seats: 5}),
+		(con37:Constituency {Name: "Waterford", Seats: 4}),
+		(con38:Constituency {Name: "Wexford", Seats: 5}),
+		(con39:Constituency {Name: "Wicklow", Seats: 5});
