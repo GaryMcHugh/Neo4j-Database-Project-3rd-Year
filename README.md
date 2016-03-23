@@ -20,6 +20,7 @@ I decided that I would represent the following in my database:
 I represented each Constituency as a node in the database. The constituencies contained the properties:
 + Name
 + Seats
+
 The following is an example of a cypher create statement that I used to create the constituencies.
 ```cypher
  CREATE (con:Constituency {Name: "Carlow–Kilkenny", Seats: 5}),
@@ -33,6 +34,7 @@ I represented each Political party as a node in the database. The Political part
 + Name
 + Leader
 + Founded
+
 The following is an example of a cypher create statement that I used to create the political parties.
 ```cypher
  CREATE (par:Party {Name: "Fine Gael", Leader: "Enda Kenny", Founded: 1933}),
@@ -45,6 +47,7 @@ I represented every Candidate that ran in the election as a node in the database
 + Name
 + Gender
 + Age (where available)
+
 The following is an example of a cypher create statement that I used to create the candidates.
 ```cypher
  CREATE (can:Candidate {Name: "Noel Walsh", Gender: "Male", Age: 50}),
