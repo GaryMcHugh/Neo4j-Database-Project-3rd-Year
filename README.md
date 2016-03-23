@@ -3,7 +3,7 @@
 ###### Gary Mc Hugh, G00308668
 
 ## Introduction
-My project is about representing the candidates that ran in the 2016 general election in Ireland and their respective political parties and constituencies. 
+My project is about representing the candidates that ran in the 2016 general election in Ireland and their respective political parties and constituencies.
 This will allow users to generate interesting queries on the data like the number of female and male candidates, the oldest and youngest candidates and other queries such as these.
 The Gender of each candidate is specified as well as their age where it was available. This will enable users to generate statistics based on these traits.
 There is also information about each political party like its current leader and when it was founded, the oldest and newest party can be found using this data.
@@ -11,6 +11,10 @@ Each constituency is listed in the database with the number of seats in each con
 The goal of this project is to create an efficient way for users to get various statistics about candidates, constituencies and political parties using a graph database.
 
 ## Database
+Note: Candidates, parties and constituencies are represented as nodes with a relationship between the candidate, their party and their constituency
+Each candidate has a relationship with their party and a relationship with the constituency that they ran in.
+
+
 I decided that I would represent the following in my database:
 + Constituencies
 + Political parties
@@ -56,7 +60,7 @@ The following is an example of a cypher create statement that I used to create t
 		(can3:Candidate {Name: "Conor Mac Liam", Gender: "Male", Age: 55}), ...
 ```
 
-#### Relationships
+#### Candidate --> party Relationships
 I created a relationship between each candidate and their respective political parties. 
 I created a node called 'Independent' so that all Independent candidates (those not in a party) could be easily represented.
 This relationship allows statistics to be generated on the number of candidates in each party and the youngest/oldest candidate in each party.
@@ -79,6 +83,16 @@ CREATE
 The following is an example of a cypher create statement that I used to create a single relationship between a candidate and a party.
 ```cypher
 MATCH (cand4:Candidate {Name: "Adrienne Wallace"}),(part4:Party {Name: "Anti-Austerity Alliance–People Before Profit"}) CREATE cand4-[:IS_IN]->part4;
+```
+
+#### Candidate --> constituency Relationships
+I created a relationship between each candidate and their respective constituencies. 
+This means that every candidate has a relationship with their constituency and their party.
+This relationship allows statistics to be generated on the number of candidates that ran in each constituency.
+
+The following is an example of a cypher create statement that I used to create a single relationship between a candidate and a constituency.
+```cypher
+MATCH (cand:Candidate {Name: "Noel Walsh"}),(con:Constituency {Name: "Carlow–Kilkenny"}) CREATE cand-[:RAN_IN]->con;
 ```
 
 ## Queries
