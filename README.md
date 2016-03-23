@@ -20,23 +20,63 @@ I decided that I would represent the following in my database:
 I represented each Constituency as a node in the database. The constituencies contained the properties:
 + Name
 + Seats
+The following is an example of a cypher create statement that I used to create the constituencies.
+```cypher
+ CREATE (con:Constituency {Name: "Carlow–Kilkenny", Seats: 5}),
+		(con1:Constituency {Name: "Cavan–Monaghan", Seats: 4}),
+		(con2:Constituency {Name: "Clare", Seats: 4}),
+		(con3:Constituency {Name: "Cork_East", Seats: 4}), ...
+```
 
 #### Political parties
 I represented each Political party as a node in the database. The Political parties contained the properties:
 + Name
 + Leader
 + Founded
-
+The following is an example of a cypher create statement that I used to create the political parties.
+```cypher
+ CREATE (par:Party {Name: "Fine Gael", Leader: "Enda Kenny", Founded: 1933}),
+		(par1:Party {Name: "Fianna Fail", Leader: "Micheal Martin", Founded: 1926}),
+		(par2:Party {Name: "Labour Party", Leader: "Joan Burton", Founded: 1912}),
+		(par3:Party {Name: "Sinn Fein", Leader: "Gerry Adams", Founded: 1905}), ...
+```
 #### Candidates
 I represented every Candidate that ran in the election as a node in the database. Each candidate contained the properties:
 + Name
 + Gender
 + Age (where available)
+The following is an example of a cypher create statement that I used to create the candidates.
+```cypher
+ CREATE (can:Candidate {Name: "Noel Walsh", Gender: "Male", Age: 50}),
+		(can1:Candidate {Name: "Keith Gilligan", Gender: "Male"}),
+		(can2:Candidate {Name: "Paddy J Manning", Gender: "Male", Age: 52}),
+		(can3:Candidate {Name: "Conor Mac Liam", Gender: "Male", Age: 55}), ...
+```
 
 #### Relationships
 I created a relationship between each candidate and their respective political parties. 
 I created a node called 'Independent' so that all Independent candidates (those not in a party) could be easily represented.
 This relationship allows statistics to be generated on the number of candidates in each party and the youngest/oldest candidate in each party.
+
+The following is an example of a cypher create statement that I used to create multiple relationships between candidates and parties.
+```cypher
+MATCH
+		(cand:Candidate  {Name: "Noel Walsh"}),(part:Party {Name: "Independant"}),
+		(cand1:Candidate {Name: "Keith Gilligan"}),(part1:Party {Name: "Independant"}),
+		(cand2:Candidate {Name: "Paddy J Manning"}),(part2:Party {Name: "Independant"}),
+		(cand3:Candidate {Name: "Conor Mac Liam"}),(part3:Party {Name: "Anti-Austerity Alliance–People Before Profit"}), ...
+		
+CREATE  
+		cand-[:IS_IN]->part,
+		cand1-[:IS_IN]->part1,
+		cand2-[:IS_IN]->part2,
+		cand3-[:IS_IN]->part3, ...
+```
+
+The following is an example of a cypher create statement that I used to create a single relationship between a candidate and a party.
+```cypher
+MATCH (cand4:Candidate {Name: "Adrienne Wallace"}),(part4:Party {Name: "Anti-Austerity Alliance–People Before Profit"}) CREATE cand4-[:IS_IN]->part4;
+```
 
 ## Queries
 Summarise your three queries here.
