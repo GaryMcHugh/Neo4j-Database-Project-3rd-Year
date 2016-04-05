@@ -90,6 +90,21 @@ I created a relationship between each candidate and their respective constituenc
 This means that every candidate has a relationship with their constituency and their party.
 This relationship allows statistics to be generated on the number of candidates that ran in each constituency.
 
+The following is an example of a cypher create statement that I used to create multiple relationships between candidates and their constituency.
+```cypher
+MATCH
+		(cand:Candidate  {Name: "Noel Walsh"}),(con:Constituency {Name: "Carlow–Kilkenny"}),
+		(cand1:Candidate {Name: "Keith Gilligan"}),(con1:Constituency {Name: "Carlow–Kilkenny"}),
+		(cand2:Candidate {Name: "Paddy J Manning"}),(con2:Constituency {Name: "Carlow–Kilkenny"}),																	
+		(cand3:Candidate {Name: "Conor Mac Liam"}),(con3:Constituency {Name: "Carlow–Kilkenny"})...
+		
+CREATE  
+		cand-[:RAN_IN]->con,
+		cand1-[:RAN_IN]->con1,
+		cand2-[:RAN_IN]->con2,
+		cand3-[:RAN_IN]->con3...
+```
+
 The following is an example of a cypher create statement that I used to create a single relationship between a candidate and a constituency.
 ```cypher
 MATCH (cand:Candidate {Name: "Noel Walsh"}),(con:Constituency {Name: "Carlow–Kilkenny"}) CREATE cand-[:RAN_IN]->con;
