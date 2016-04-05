@@ -1,3 +1,5 @@
+// This is the query I created to make nodes for all the political parties in Ireland.
+
  CREATE (par:Party {Name: "Fine Gael", Leader: "Enda Kenny", Founded: 1933}),
 		(par1:Party {Name: "Fianna Fail", Leader: "Micheal Martin", Founded: 1926}),
 		(par2:Party {Name: "Labour Party", Leader: "Joan Burton", Founded: 1912}),
