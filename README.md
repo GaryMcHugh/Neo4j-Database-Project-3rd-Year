@@ -132,3 +132,4 @@ RETURN
 3. [Deleting a node](http://neo4j.com/docs/stable/query-delete.html), This is where I got the query to delete a node from the database.
 4. [Candidates](http://www.thejournal.ie/election-2016/?jrnl=campaign), This is where I got the details of all candidates that ran in the 2016 general election.
 5. [Deleting a node with relationships] (http://stackoverflow.com/questions/14252591/delete-all-nodes-and-relationships-in-neo4j-1-8), This is where I found out how to delete nodes with relationships when I ran into issues with the candidate and party’s relationships.
+6. [Matching nodes and their relationships] (http://neo4j.com/docs/stable/query-match.html), used to retrieve a candidate and their relationship to a party and constituency. (under outgoing relationships section)
