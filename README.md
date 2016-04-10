@@ -111,34 +111,46 @@ MATCH (cand:Candidate {Name: "Noel Walsh"}),(con:Constituency {Name: "Carlow–K
 ```
 
 ## Queries
-Summarise your three queries here.
-Then explain them one by one in the following sections.
+My 3 interesting queries include:
++ Returning the oldest Male and Female Candidates
++ Constituencies with most candidates
++ Shortest Path between 2 party leaders
 
-#### Query one title
-This query retrieves the Bacon number of an actor...
+The first query retrieves the Oldest Male and Female from the database, it also returns the Constituency they Ran in and the party that they are in.
+In graph view you can see the nodes of the oldest male and female candidates and their party and constituency with the relationships.
+
+The second query retrieves the 10 constituencies with the most candidates running in them, it returns both the name of the constituency and the count of how many candidates ran in each constituency
+This query is intended to be viewed in Row mode where you will see both the constituency and the count value.
+
+The final query retrieves the shortest path between Enda Kenny and Micheal Martin. I done this as there is a lot of attention on these leaders in the media as to who will be Taoiseach.
+This query is intended to viewed in Graph mode where you will see The shortest path between these two candidates/leaders.
+
+#### Oldest male and female with their party and constituency
+This query retrieves the oldest Male and Female along with their constituency and party (with relationships in graph view)
 ```cypher
-MATCH
-	(Bacon)
-RETURN
-	Bacon;
+MATCH 
+	(male:Candidate {Gender: "Male"})-[:RAN_IN]->(constituency), (male:Candidate {Gender: "Male"})-[:IS_IN]->(party), 
+	(female:Candidate {Gender: "Female"})-[:RAN_IN]->(constituency1), (female:Candidate {Gender: "Female"})-[:IS_IN]->(party1)
+WHERE has (male.Age) AND has (female.Age)
+RETURN male,constituency,party, female, constituency1, party1 
+ORDER BY male.Age DESC,female.Age DESC
+LIMIT 1;
 ```
 
-#### Query two title
-This query retrieves the Bacon number of an actor...
+#### 10 constituencies with the most candidates
+This query retrieves the 10 Constituencies with the most candidates running in them and shows a count to indicate how many candidates ran in the constituencies
 ```cypher
-MATCH
-	(Bacon)
-RETURN
-	Bacon;
+MATCH (con:Constituency), (candidate), (candidate)-[r]->(con)
+RETURN con, COUNT(r)
+ORDER BY COUNT(r) DESC
+LIMIT 10
 ```
 
-#### Query three title
-This query retrieves the Bacon number of an actor...
+#### Shortest path from Enda Kenny to Micheal Martin
+This query retrieves the shortest path between Fine Gael Leader Enda Kenny and Fianna Fail Leader Micheal Martin who are the fore runners for Taoiseach with an upper limit of 15 relationships in length.
 ```cypher
-MATCH
-	(Bacon)
-RETURN
-	Bacon;
+MATCH (cand:Candidate {Name: "Enda Kenny"}),(cand1:Candidate {Name: "Micheal Martin"}), p = shortestPath((cand)-[*..15]-(cand1))
+RETURN p
 ```
 
 ## References
@@ -147,4 +159,10 @@ RETURN
 3. [Candidates](http://www.thejournal.ie/election-2016/?jrnl=campaign), This is where I got the details of all candidates that ran in the 2016 general election.
 4. [Deleting a node](http://neo4j.com/docs/stable/query-delete.html), This is where I got the query to delete a node from the database.
 5. [Deleting a node with relationships] (http://stackoverflow.com/questions/14252591/delete-all-nodes-and-relationships-in-neo4j-1-8), This is where I found out how to delete nodes with relationships when I ran into issues with the candidate and party’s relationships.
-6. [Matching nodes and their relationships] (http://neo4j.com/docs/stable/query-match.html), used to retrieve a candidate and their relationship to a party and constituency. (under multiple relationships section)
+6. [Matching nodes and their relationships] (http://neo4j.com/docs/stable/query-match.html#match-multiple-relationships), used to retrieve a candidate and their relationship to a party and constituency.
+7. [has () clause] (https://groups.google.com/forum/#!topic/neo4j/KsAptoZFOz4), this is where I found out about how to use the has clause (query1)(Rodger's responses).
+8. [Finding age and using count] (http://www.fromdev.com/2013/10/Cypher-Query-Snippets-Neo4j-Development.html), I found that this website had some useful queries, mainly the age related ones for query 1 and count for query 2.
+9. [Filtering in a property] (http://neo4j.com/docs/stable/query-where.html#where-filter-on-node-property), I used this to understand how to return a Candidates age.
+10. [Shortest Path] (http://neo4j.com/docs/milestone/query-match.html#query-shortest-path), This is where I found out how to use the shortest path function for query 3.
+11. I also used the commands that I saved from attending labs, these are contained in labCommands.txt, which I have included in this repository.
+12. I also used the problem sheet solutions which are available from Moodle.

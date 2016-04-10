@@ -1,0 +1,91 @@
+ Create a new node
+ CREATE (jerry:User {Name: "Jerry" });
+ 
+ Create a relationship between 2 nodes
+ MATCH (jack:User {Name: "Jack"}),(jerry:User {Name: "Jerry"}) CREATE jack-[:FOLLOWS]->jerry RETURN jack, jerry;
+ 
+ Set a property on a node
+ MATCH (n:User {Name: 'Jack'}) SET n.joinedTwitter = "May 2010" RETURN n;
+ 
+ Set a label on a new
+ MATCH (n:User {Name: 'Jack'}) SET n :NeedsFollowers RETURN n;
+ 
+ return specific users
+ MATCH (jack:User {Name: "Jack"}),(john:User {Name: "John"})
+ RETURN jack, john;
+
+Return the id of Kevin Bacon 
+MATCH (n:Actor)
+WHERE n.name =~ ".*evin.*acon.*"
+RETURN n;
+
+MATCH (n:Actor)
+WHERE n.name =~ ".*evin.*acon.*"
+RETURN ID(n);
+
+MATCH (n:Actor)
+WHERE ID(n) = 759
+RETURN n;
+
+Return movies Kevin Bacon was in
+MATCH (n:Actor)-[:ACTS_IN]->(m:Movie)
+WHERE ID(n) = 759
+RETURN m.title;
+
+Alphabetical Order
+MATCH (n:Actor)-[:ACTS_IN]->(m:Movie)
+WHERE ID(n) = 759
+RETURN m.title
+ORDER BY m.title;
+
+With a limit
+MATCH (n:Actor)-[:ACTS_IN]->(m:Movie)
+WHERE ID(n) = 759
+RETURN m.title
+ORDER BY m.title
+LIMIT 5;
+ 
+ return 3 nodes
+ MATCH (kb:Actor {name: "Kevin Bacon"}),
+		(ep:Actor {name: "Elvis Presley"}),
+		(ea:Actor {name: "Edward Asner"})
+RETURN kb, ep, ea;
+
+optional match
+MATCH (kb:Actor {name: "Kevin Bacon"})
+MATCH (ep:Actor {name: "Elvis Presley"})
+MATCH (ea:Actor {name: "Edward Asner"})
+OPTIONAL MATCH (gmh:Actor {name: "Gary Mc Hugh"})
+RETURN kb, ep, ea, gmh;
+
+q8.
+MATCH (kb:Actor {name: "Kevin Bacon"}),
+		(ep:Actor {name: "Elvis Presley"}),
+		(ea:Actor {name: "Edward Asner"})
+OPTIONAL MATCH (kb)-[ACTS_IN]->(mkbea:Movie)<-[:ACTS_IN]-(ea)
+RETURN kb, ep, ea;
+
+Q11 (shortest path)
+MATCH  p=ShortestPath(
+	(kb:Actor {name: "Kevin Bacon"})
+	-[ACTS_IN*]-
+	(ep:Actor {name: "Elvis Presley"})
+)
+RETURN p;
+
+no of relationships
+MATCH  p=ShortestPath(
+	(kb:Actor {name: "Kevin Bacon"})
+	-[r:ACTS_IN*]-
+	(ep:Actor {name: "Elvis Presley"})
+)
+RETURN LENGTH(relationships(p));
+
+return bacon number of Actor
+MATCH  p=ShortestPath(
+	(kb:Actor {name: "Kevin Bacon"})
+	-[r:ACTS_IN*]-
+	(ep:Actor {name: "Elvis Presley"})
+)
+RETURN LENGTH(relationships(p)) /2 as BaconNo;
+ 
